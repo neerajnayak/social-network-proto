@@ -5,7 +5,7 @@ import {
   AUTH_FAILED,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT
+  LOGOUT,
 } from '../actions/types';
 
 const initialState = {
