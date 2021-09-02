@@ -1,16 +1,19 @@
 import { React, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile } from '../../actions/profile';
+import { deleteAccount, getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
+import Education from './Education';
 
 const Dashboard = ({
   auth: { user },
   profile: { profile, loading },
   getCurrentProfile,
+  deleteAccount
 }) => {
   useEffect(() => {
     getCurrentProfile();
@@ -21,12 +24,14 @@ const Dashboard = ({
   ) : (
     <Fragment>
       <h1 className="large text-primary">Dashboard</h1>
-      <p class="lead">
-        <i class="fas fa-user"></i> Welcome {user?.name}
+      <p className="lead">
+        <i className="fas fa-user"></i> Welcome {user?.name}
       </p>
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
+          <Experience experience={profile.experience} />
+          <Education education={profile.education} />
         </Fragment>
       ) : (
         <Fragment>
@@ -36,6 +41,9 @@ const Dashboard = ({
           </Link>
         </Fragment>
       )}
+      <div className="my-2">
+        <button className="btn btn-danger" onClick={() => deleteAccount()}><i className="fas fa-user-minus" /> Delete My Account</button> 
+      </div>
     </Fragment>
   );
 };
@@ -44,6 +52,7 @@ Dashboard.propTypes = {
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -51,4 +60,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
+export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard);
