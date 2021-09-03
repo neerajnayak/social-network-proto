@@ -12,8 +12,6 @@ const initialState = {
   skills: '',
   bio: '',
   githubusername: '',
-  experience: '',
-  education: '',
   youtube: '',
   twitter: '',
   facebook: '',
@@ -33,7 +31,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
       ...profile?.social,
       skills: profile?.skills?.join(',')
     });
-  }, [loading]);
+  }, [loading, getCurrentProfile, setFormData]);
 
   const {
     company,
@@ -43,8 +41,6 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
     skills,
     bio,
     githubusername,
-    experience,
-    education,
     youtube,
     twitter,
     facebook,
