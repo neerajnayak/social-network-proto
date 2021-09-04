@@ -12,6 +12,8 @@ import AddExperience from './components/profile-forms/AddExperience';
 import AddEducation from './components/profile-forms/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profiles/Profile';
+import Posts from './components/posts/Posts';
+import Post from './components/posts/Post';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -52,6 +54,8 @@ const App = () => {
               <PrivateRoute path="/add-education" exact component={AddEducation} />
               <Route path="/profiles" exact component={Profiles} />
               <Route path="/profile/:id" component={Profile} />
+              <PrivateRoute path="/posts" exact component={Posts} />
+              <PrivateRoute path="/posts/:id" exact component={Post} />
             </Switch>
           </section>
         </Fragment>
